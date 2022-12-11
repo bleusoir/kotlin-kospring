@@ -44,10 +44,12 @@ open class UserServiceTests @Autowired constructor(
     fun getUsersTest() {
 
         // given
-        userRepository.saveAll(listOf(
-            User("A", 20),
-            User("B", null),
-        ))
+        userRepository.saveAll(
+            listOf(
+                User("A", 20, mutableListOf(), null),
+                User("B", null, mutableListOf(), null),
+            )
+        )
 
         // when
         val results = userService.users
@@ -61,8 +63,8 @@ open class UserServiceTests @Autowired constructor(
     @Test
     fun updateUserNameTest() {
         // given
-        val savedUser = userRepository.save(User("A", null))
-        val req = UserUpdateRequest(savedUser.id, "B")
+        val savedUser = userRepository.save(User("A", null, mutableListOf(), null))
+        val req = UserUpdateRequest(savedUser.id!!, "B")
 
         // when
         userService.updateUserName(req)
@@ -77,7 +79,7 @@ open class UserServiceTests @Autowired constructor(
     fun deleteUserTest() {
 
         // given
-        userRepository.save(User("A", null))
+        userRepository.save(User("A", null, mutableListOf(), null))
 
         // when
         userService.deleteUser("A")

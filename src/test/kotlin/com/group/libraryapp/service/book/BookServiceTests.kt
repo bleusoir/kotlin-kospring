@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import java.lang.IllegalArgumentException
 
 @SpringBootTest
 class BookServiceTests @Autowired constructor(
@@ -52,8 +51,8 @@ class BookServiceTests @Autowired constructor(
     fun loanBookTest() {
         // given
         bookRepository.save(Book("TEST BOOK"))
-        val savedUser = userRepository.save(User("A", null))
-        val req = BookLoanRequest("A", "TEST BOOK", )
+        val savedUser = userRepository.save(User("A", null, mutableListOf(), null))
+        val req = BookLoanRequest("A", "TEST BOOK")
 
         // when
         bookService.loanBook(req)
@@ -72,9 +71,9 @@ class BookServiceTests @Autowired constructor(
 
         // given
         bookRepository.save(Book("TEST BOOK"))
-        val savedUser = userRepository.save(User("A", null))
+        val savedUser = userRepository.save(User("A", null, mutableListOf(), null))
         userLoanHistoryRepository.save(UserLoanHistory(savedUser, "TEST BOOK", false))
-        val req = BookLoanRequest("A", "TEST BOOK", )
+        val req = BookLoanRequest("A", "TEST BOOK")
 
         // when & then
         val message = assertThrows<IllegalArgumentException> {
@@ -89,7 +88,7 @@ class BookServiceTests @Autowired constructor(
 
         // given
         bookRepository.save(Book("TEST BOOK"))
-        val savedUser = userRepository.save(User("A", null))
+        val savedUser = userRepository.save(User("A", null, mutableListOf(), null))
         userLoanHistoryRepository.save(UserLoanHistory(savedUser, "TEST BOOK", false))
         val req = BookReturnRequest("A", "TEST BOOK")
 
