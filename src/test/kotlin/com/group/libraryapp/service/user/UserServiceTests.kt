@@ -13,7 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.transaction.annotation.Transactional
 
 @SpringBootTest
-open class UserServiceTests @Autowired constructor(
+class UserServiceTests @Autowired constructor(
     private val userRepository: UserRepository,
     private val userService: UserService,
 ) {
@@ -52,7 +52,7 @@ open class UserServiceTests @Autowired constructor(
         )
 
         // when
-        val results = userService.users
+        val results = userService.getUsers()
 
         // then
         assertThat(results).hasSize(2)
@@ -87,5 +87,4 @@ open class UserServiceTests @Autowired constructor(
         // then
         assertThat(userRepository.findAll()).isEmpty()
     }
-
 }

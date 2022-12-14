@@ -6,7 +6,7 @@ import javax.persistence.*
 import javax.persistence.GenerationType.IDENTITY
 
 @Entity
-class User(
+class User constructor(
 
     var name: String,
 
@@ -17,7 +17,7 @@ class User(
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    val id: Long?,
+    val id: Long? = null,
 ) {
 
     init {
