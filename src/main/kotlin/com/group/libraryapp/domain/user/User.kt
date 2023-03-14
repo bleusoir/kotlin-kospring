@@ -21,6 +21,7 @@ class User constructor(
 ) {
 
     init {
+        @Suppress("LeakingThis")
         if (name.isBlank()) {
             throw IllegalArgumentException("이름은 비어 있을 수 없습니다")
         }
@@ -31,7 +32,7 @@ class User constructor(
     }
 
     fun loanBook(book: Book) {
-        this.userLoanHistories.add(UserLoanHistory(this, book.name, false))
+        this.userLoanHistories.add(UserLoanHistory(this, book.name))
     }
 
     fun returnBook(bookName: String) {
