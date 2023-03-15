@@ -99,7 +99,7 @@ class UserServiceTests @Autowired constructor(
     }
 
     @Test
-    @DisplayName("대출 기록이 없는 사용자의 응답이 정상 동작한다")
+    @DisplayName("대출 기록이 없는 사용자의 응답이 정상 동작")
     fun getEmptyUserLoanHistoryTest() {
 
         // given
@@ -115,7 +115,7 @@ class UserServiceTests @Autowired constructor(
     }
 
     @Test
-    @DisplayName("대출 기록이 많은 사용자의 응답이 정상 동작한다")
+    @DisplayName("대출 기록이 많은 사용자의 응답이 정상 동작")
     fun getManyUserLoanHistoriesTest() {
 
         // given

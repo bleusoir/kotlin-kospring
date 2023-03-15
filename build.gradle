@@ -3,9 +3,18 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
     id 'org.jetbrains.kotlin.jvm' version '1.7.22'
+
+    /* JPA Entity 클래스에 대해 기본 생성자를 만들어주는 플러그인.
+        JPA에서 동적으로 Entity 생성시 reflection기능을 이용하는데, 이 때 기본 생성자가 필요하기 때문.
+     */
     id 'org.jetbrains.kotlin.plugin.jpa' version '1.6.21'
+
+    // JPA의 기타 어노테이션들에 대해서도 open class로 변경해주기 위한 플러그인. 아래 allOpen 속성 확인.
     id 'org.jetbrains.kotlin.plugin.allopen' version '1.6.21'
+
+    // 스프링 관련 어노테이션들에 대해서 open class로 변경해주는 플러그인.
     id 'org.jetbrains.kotlin.plugin.spring' version '1.6.21'
+    id 'org.jetbrains.kotlin.kapt' version '1.6.21'
 }
 
 allOpen {
@@ -27,6 +36,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
     implementation 'org.jetbrains.kotlin:kotlin-reflect:1.6.21'
+    implementation 'com.querydsl:querydsl-jpa:5.0.0'
+    kapt("com.querydsl:querydsl-apt:5.0.0:jpa")
+    kapt("org.springframework.boot:spring-boot-configuration-processor")
 
     // 코틀린 data class에서 json을 파싱하기 위한 모듈.
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.14.2'
